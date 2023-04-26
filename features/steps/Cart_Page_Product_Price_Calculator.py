@@ -30,10 +30,10 @@ def click_plus_icon(context):
 
 @then('Verify total price has doubled')
 def verify_doubled_price(context):
-    context.app.cart_page.price_has_doubled()
+    context.app.cart_page.price_has_doubled("Rs. 590.00")
 
 
 @then('Verify that product quantity is set to 2')
 def verify_product_quantity(context):
-    context.app.cart_page.quantity_has_doubled()
+    context.app.cart_page.quantity_has_doubled("2")
 

@@ -16,7 +16,6 @@ class CartPage(Page):
     QUANTITY_UPDATED_VALUE = (By.CSS_SELECTOR, "input[value='2']")
 
 
-
     def click_view_cart(self):
         self.driver.find_element(*self.VIEW_CART_BUTTON).click()
 
@@ -32,15 +31,27 @@ class CartPage(Page):
     def clicking_plus_icon(self):
         self.driver.find_element(*self.PLUS_ICON_BUTTON).click()
 
-    def price_has_doubled(self, expected_price="Rs. 590.00", *locator):
+    def price_has_doubled(self, expected_price, *locator):
+        global product_price
         sleep(2)
         doubled_price = self.driver.find_element(By.CSS_SELECTOR, "p.totals__subtotal-value").text
         self.driver.find_element(*self.CART_PRICE_STORAGE)
-        assert expected_price == doubled_price, \
-            f'Checking by locator {locator}. Expected {expected_price}, but got {doubled_price}'
+        product_price = expected_price
+        assert product_price == doubled_price, \
+            f'Checking by locator {"p.totals__subtotal-value"}. Expected {expected_price}, but got {doubled_price}'
         print(doubled_price)
+        print(expected_price)
+        print(product_price)
 
-    def quantity_has_doubled(self):
+    def quantity_has_doubled(self, expected_value, *locator):
+        value_to_be_verified = self.driver.find_element(*self.QUANTITY_UPDATED_VALUE)
+        actual_value = value_to_be_verified.get_attribute("value")
         self.driver.find_element(*self.QUANTITY_UPDATED_VALUE)
+        assert expected_value == actual_value, \
+            f'Expected {expected_value}, got {actual_value}'
+        print(expected_value)
+        print(actual_value)
+
+
 
 

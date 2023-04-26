@@ -10,6 +10,7 @@ class MainPage(Page):
         self.open_url('https://shop.cureskin.com/')
 
     def return_nav_to_cureskin_main(self):
-        self.wait_for_element_appear(*self.MAIN_PAGE_TEXT)
+        back_to_main = self.wait_for_element_appear(*self.MAIN_PAGE_TEXT)
+        assert back_to_main, f"Expected navigation to Main Page"
 
 
