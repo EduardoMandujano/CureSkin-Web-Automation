@@ -3,9 +3,10 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.support.wait import WebDriverWait
 from app.application import Application
-# from webdriver_manager.firefox import GeckoDriverManager
-# from webdriver_manager.chrome import ChromeDriverManager
-# from selenium.webdriver.support.events import EventFiringWebDriver
+# I reinstalled the webdriver_manager package to the CureSkin project
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.events import EventFiringWebDriver
 
 from support.logger import logger, MyListener
 
@@ -21,13 +22,20 @@ def browser_init(context, test_name):
     :param test_name: scenario.name
     """
     service = ChromeService('/Users/eduar/Automation/CureSkin-Web-Automation/chromedriver')
+    # Uncomment the line below for Firefox testing
     # service = FirefoxService('geckodriver.exe')
+    # Comment OUT the line below to run Headless Mode
     context.driver = webdriver.Chrome(service=service)
+    # Uncomment the line below for Firefox testing
     # context.driver = webdriver.Firefox(service=service)
+    # This line below, did NOT work. Keeping it here for reference.
     # context.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    # I added this line below to make this work. There was a recent change in Python 3 VS Python 4.
+    # context.driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     # context.driver = webdriver.Safari()
 
     ## HEADLESS MODE ####
+    # Uncomment the code block below to launch Headless Mode
     # options = webdriver.ChromeOptions()
     # options.add_argument('--headless')
     # context.driver = webdriver.Chrome(
