@@ -21,11 +21,11 @@ def browser_init(context, test_name):
     :param context: Behave context
     :param test_name: scenario.name
     """
-    service = ChromeService('/Users/eduar/Automation/CureSkin-Web-Automation/chromedriver')
+    # service = ChromeService('/Users/eduar/Automation/CureSkin-Web-Automation/chromedriver')
     # Uncomment the line below for Firefox testing
     # service = FirefoxService('geckodriver.exe')
     # Comment OUT the line below to run Headless Mode
-    context.driver = webdriver.Chrome(service=service)
+    # context.driver = webdriver.Chrome(service=service)
     # Uncomment the line below for Firefox testing
     # context.driver = webdriver.Firefox(service=service)
     # This line below, did NOT work. Keeping it here for reference.
@@ -55,19 +55,19 @@ def browser_init(context, test_name):
 
     # for browerstack ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    # bs_user = 'eduardomandujano_hQWLx6'
-    # bs_key = 'r87z3v1uSm3tpePpwNq7'
-    #
-    # desired_cap = {
-    #     'browserName': 'Firefox',
-    #     'bstack:options': {
-    #         'os': 'Windows',
-    #         'osVersion': '10',
-    #         'sessionName': test_name
-    #     }
-    # }
-    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-    # context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
+    bs_user = 'eduardomandujano_hQWLx6'
+    bs_key = 'r87z3v1uSm3tpePpwNq7'
+
+    desired_cap = {
+        'browserName': 'Firefox',
+        'bstack:options': {
+            'os': 'OS X',
+            'osVersion': 'Monterey',
+            'sessionName': test_name
+        }
+    }
+    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
