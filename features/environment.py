@@ -1,8 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.support.wait import WebDriverWait
 from app.application import Application
+from time import sleep
 
 # I reinstalled the webdriver_manager package to the CureSkin project
 from webdriver_manager.firefox import GeckoDriverManager
@@ -72,6 +74,25 @@ def browser_init(context, test_name):
     # }
     # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
     # context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
+
+    # Mobile-Web Emulator
+    mobile_emulation = {"deviceName": "iPhone 12 Pro"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(options=chrome_options)
+
+    # The line below did NOT work. Leaving here for later reference.
+    # context.driver = webdriver.Remote(command_executor='http://127.0.0.1:4444/wd/hub',
+    #                                   desired_capabilities=chrome_options.to_capabilities())
+
+    # For Specific Individual Mobile Device Attributes
+    # Produced Inconsistent Results Use Above Code Block
+    # mobile_emulation = {
+    #     "deviceMetrics": {"width": 812, "height": 375, "pixelRatio": 3.0},
+    #     "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"}
+    # chrome_options = Options()
+    # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    # context.driver = webdriver.Chrome(chrome_options=chrome_options)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
