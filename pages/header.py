@@ -13,6 +13,7 @@ class Header(Page):
     NUMBER_ZERO = (By.CSS_SELECTOR, "span.nav-cart-0")
     DEPARTMENT_SELECTION = (By.ID, 'searchDropdownBox')
     SEARCH_INPUT_FIELD = (By.ID, 'twotabsearchtextbox')
+    LOGIN_ICON = (By.CSS_SELECTOR, 'a.header__icon')
 
     def click_orders_menu(self):
         self.click(*self.ORDERS_CLICK)
@@ -30,4 +31,10 @@ class Header(Page):
         e.clear()
         e.send_keys(text)
         print(f'Inputting text: {text}')
+
+    def open_cureskin_search(self):
+        self.open_url('https://shop.cureskin.com/search?q=cure')
+
+    def click_login_icon(self):
+        self.click(*self.LOGIN_ICON)
 

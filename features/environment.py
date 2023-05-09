@@ -7,6 +7,7 @@ from app.application import Application
 from time import sleep
 
 # I reinstalled the webdriver_manager package to the CureSkin project
+
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.events import EventFiringWebDriver
@@ -27,15 +28,26 @@ def browser_init(context, test_name):
     :param context: Behave context
     :param test_name: scenario.name
     """
-    service = ChromeService('/Users/eduar/Automation/CureSkin-Web-Automation/chromedriver')
+    # The line below does NOT work anymore with the Chrome Webdriver Update
+    # service = ChromeService('/Users/eduar/Automation/CureSkin-Web-Automation/chromedriver')
+
     # Uncomment the line below for Firefox testing
     # service = FirefoxService('geckodriver.exe')
+
     # Comment OUT the line below to run Headless Mode
-    context.driver = webdriver.Chrome(service=service)
-    # Uncomment the line below for Firefox testing
+    # context.driver = webdriver.Chrome(service=service)
+
+    # To update Chrome Webdriver uncomment the line below
+    # You need ONLY ONE instance of context.driver, never more than ONE.
+    context.driver = webdriver.Chrome(ChromeDriverManager().install())
+    # context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+    # Uncomment the line below for Firefox testing (NOT working anymore)
     # context.driver = webdriver.Firefox(service=service)
-    # This line below, did NOT work. Keeping it here for reference.
+
+    # Use this line ONLY for Firefox testing
     # context.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
     # I added this line below to make this work. There was a recent change in Python 3 VS Python 4.
     # context.driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     # context.driver = webdriver.Safari()
@@ -76,10 +88,10 @@ def browser_init(context, test_name):
     # context.driver = webdriver.Remote(url, desired_capabilities=desired_cap)
 
     # Mobile-Web Emulator
-    mobile_emulation = {"deviceName": "iPhone 12 Pro"}
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-    context.driver = webdriver.Chrome(options=chrome_options)
+    # mobile_emulation = {"deviceName": "iPhone 12 Pro"}
+    # chrome_options = webdriver.ChromeOptions()
+    # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    # context.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options)
 
     # The line below did NOT work. Leaving here for later reference.
     # context.driver = webdriver.Remote(command_executor='http://127.0.0.1:4444/wd/hub',
