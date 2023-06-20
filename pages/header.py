@@ -14,6 +14,7 @@ class Header(Page):
     DEPARTMENT_SELECTION = (By.ID, 'searchDropdownBox')
     SEARCH_INPUT_FIELD = (By.ID, 'twotabsearchtextbox')
     LOGIN_ICON = (By.CSS_SELECTOR, 'a.header__icon')
+    SHOP_ALL_LINK = (By.CSS_SELECTOR, 'a.header__menu-item.header__menu-item--top.list-menu__item.focus-inset')
 
     def click_orders_menu(self):
         self.click(*self.ORDERS_CLICK)
@@ -37,4 +38,12 @@ class Header(Page):
 
     def click_login_icon(self):
         self.click(*self.LOGIN_ICON)
+
+    def click_shop_all(self):
+        self.find_element(*self.SHOP_ALL_LINK).click()
+
+    def verify_shop_all(self, expected_shop_all_url="https://shop.cureskin.com/collections/all"):
+        actual_shop_all_url = self.driver.current_url
+        assert actual_shop_all_url == expected_shop_all_url, \
+            f"Expected {expected_shop_all_url} instead got {actual_shop_all_url}"
 

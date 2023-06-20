@@ -12,6 +12,8 @@ class Footer(Page):
     BLOG_LINK = (By.CSS_SELECTOR, 'a.link.list-menu__item.list-menu__item--link[href="https://cureskin.com/blog"]')
     FAQS_LINK = (By.CSS_SELECTOR, 'a.link.list-menu__item.list-menu__item--link[href="https://cureskin.com/faqs/"]')
     REFUND_LINK = (By.CSS_SELECTOR, 'a.link.list-menu__item.list-menu__item--link[href="/policies/refund-policy"]')
+    PRIVACY_LINK = (By.CSS_SELECTOR, 'a.link.list-menu__item.list-menu__item--link[href="/policies/privacy-policy"]')
+    SHIPPING_LINK = (By.CSS_SELECTOR, 'a.link.list-menu__item.list-menu__item--link[href="/policies/shipping-policy"]')
 
     def click_on_about_us(self):
         self.driver.find_element(*self.ABOUT_US_LINK).click()
@@ -68,4 +70,20 @@ class Footer(Page):
         actual_refund_url = self.driver.current_url
         assert actual_refund_url == expected_refund_url, \
             f"Expected{expected_refund_url} instead got {actual_refund_url}"
+
+    def click_privacy(self):
+        self.driver.find_element(*self.PRIVACY_LINK).click()
+
+    def verify_privacy(self, expected_privacy_url="https://shop.cureskin.com/policies/privacy-policy"):
+        actual_privacy_url = self.driver.current_url
+        assert actual_privacy_url == expected_privacy_url, \
+            f"Expected {expected_privacy_url} instead got {actual_privacy_url}"
+
+    def click_shipping(self):
+        self.driver.find_element(*self.SHIPPING_LINK).click()
+
+    def verify_shipping(self, expected_shipping_url="https://shop.cureskin.com/policies/shipping-policy"):
+        actual_shipping_policy = self.driver.current_url
+        assert actual_shipping_policy == expected_shipping_url, \
+            f"Expected {expected_shipping_url} instead got {actual_shipping_policy}"
 
