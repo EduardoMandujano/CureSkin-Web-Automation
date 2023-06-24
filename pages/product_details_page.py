@@ -22,6 +22,10 @@ class ProductDetailsPage(Page):
     SHOP_BY_HAIR_LINK = (By.CSS_SELECTOR, "a.card-wrapper.card.card--media[href='/collections/hair']")
     SHAMPOO_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/hair/products/biotin-collagen-shampoo"]')
     HAIR_SOLUTION_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/hair/products/hair-pro-solution"]')
+    HAIR_CONDITIONER_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/hair/products/hair-conditioner"]')
+    HAIR_SERUM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/hair/products/smooth-shine-serum"]')
+    SHOP_BY_BODY_LINK = (By.CSS_SELECTOR, 'a.card-wrapper.card.card--media[href="/collections/body"]')
+    RESTRUCTURE_CREAM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/body/products/restructure-cream"]')
 
     def open_cureskin_cleansing_gel_prod_details(self):
         self.open_url('https://shop.cureskin.com/products/gentle-cleanse-face-foam?_pos=1&_psq=cleanse&_ss=e&_v=1.0')
@@ -115,3 +119,30 @@ class ProductDetailsPage(Page):
         actual_hair_sol_url = self.driver.current_url
         assert expected_hair_sol_url == actual_hair_sol_url, \
             F"Expected {expected_hair_sol_url} instead got {actual_hair_sol_url}"
+
+    def click_hair_conditioner(self):
+        self.driver.find_element(*self.HAIR_CONDITIONER_LINK).click()
+
+    def verify_hair_conditioner(self, expected_conditioner_url="https://shop.cureskin.com/collections/hair/products/hair-conditioner"):
+        actual_conditioner_url = self.driver.current_url
+        assert expected_conditioner_url == actual_conditioner_url, \
+            F"Expected {expected_conditioner_url} instead got {actual_conditioner_url}"
+
+    def click_on_serum(self):
+        self.driver.find_element(*self.HAIR_SERUM_LINK).click()
+
+    def verify_hair_serum(self, expected_hair_serum_url="https://shop.cureskin.com/collections/hair/products/smooth-shine-serum"):
+        actual_hair_serum_url = self.driver.current_url
+        assert actual_hair_serum_url == expected_hair_serum_url, \
+            F"Expected {expected_hair_serum_url} instead got {actual_hair_serum_url}"
+
+    def click_on_body(self):
+        self.driver.find_element(*self.SHOP_BY_BODY_LINK).click()
+
+    def click_restructure_cream(self):
+        self.driver.find_element(*self.RESTRUCTURE_CREAM_LINK).click()
+
+    def verify_restructure_cream(self, expected_rest_cream_url="https://shop.cureskin.com/collections/body/products/restructure-cream"):
+        actual_rest_cream_url = self.driver.current_url
+        assert actual_rest_cream_url == expected_rest_cream_url, \
+            F"Expected {expected_rest_cream_url}, instead got {actual_rest_cream_url}"
