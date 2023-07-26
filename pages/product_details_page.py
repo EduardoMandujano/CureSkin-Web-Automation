@@ -26,6 +26,15 @@ class ProductDetailsPage(Page):
     HAIR_SERUM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/hair/products/smooth-shine-serum"]')
     SHOP_BY_BODY_LINK = (By.CSS_SELECTOR, 'a.card-wrapper.card.card--media[href="/collections/body"]')
     RESTRUCTURE_CREAM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/body/products/restructure-cream"]')
+    SPF30_BODY_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/body/products/sunscreen-spf-30"]')
+    HYD_GEL_BODY_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/body/products/hydration-gel"]')
+    CERAMIDE_BODY_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/body/products/ceramide-care-cream"]')
+    CORRECTOR_EMULGEL_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/face/products/corrector-emulgel"]')
+    DAY_CREAM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/face/products/lightening-day-cream"]')
+    VITAMIN_CREAM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/face/products/vitamin-abc-cream"]')
+    TXA_CREAM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/face/products/txa-clear-cream"]')
+    SKIN_REN_SERUM_LINK = (By.CSS_SELECTOR, 'a.full-unstyled-link[href="/collections/face/products/cureskin-skin-renewal-serum"]')
+
 
     def open_cureskin_cleansing_gel_prod_details(self):
         self.open_url('https://shop.cureskin.com/products/gentle-cleanse-face-foam?_pos=1&_psq=cleanse&_ss=e&_v=1.0')
@@ -146,3 +155,68 @@ class ProductDetailsPage(Page):
         actual_rest_cream_url = self.driver.current_url
         assert actual_rest_cream_url == expected_rest_cream_url, \
             F"Expected {expected_rest_cream_url}, instead got {actual_rest_cream_url}"
+
+    def click_spf30_body(self):
+        self.driver.find_element(*self.SPF30_BODY_LINK).click()
+
+
+    def verify_spf30_body(self, expected_spf30_body_url="https://shop.cureskin.com/collections/body/products/sunscreen-spf-30"):
+        actual_spf30_body_url = self.driver.current_url
+        assert expected_spf30_body_url == actual_spf30_body_url, \
+            F"Expected {expected_spf30_body_url}, instead got {actual_spf30_body_url}"
+
+    def click_hyd_gel_from_body(self):
+        self.driver.find_element(*self.HYD_GEL_BODY_LINK).click()
+
+    def verify_hyd_gel_from_body(self, expected_hyd_gel_body_url="https://shop.cureskin.com/collections/body/products/hydration-gel"):
+        actual_hyd_gel_from_body = self.driver.current_url
+        assert expected_hyd_gel_body_url == actual_hyd_gel_from_body, \
+            F"Expected {expected_hyd_gel_body_url}, instead got {actual_hyd_gel_from_body}"
+
+    def click_ceramide_from_body(self):
+        self.driver.find_element(*self.CERAMIDE_BODY_LINK).click()
+
+    def verify_ceramide_from_body(self, expected_ceramide_body_url="https://shop.cureskin.com/collections/body/products/ceramide-care-cream"):
+        actual_ceramide_body_url = self.driver.current_url
+        assert actual_ceramide_body_url == expected_ceramide_body_url, \
+            F"Expected{expected_ceramide_body_url}, instead got {actual_ceramide_body_url}"
+
+    def click_corrector_emulgel(self):
+        self.driver.find_element(*self.CORRECTOR_EMULGEL_LINK).click()
+
+    def verify_corrector_emulgel(self, expected_corr_emulgel_url="https://shop.cureskin.com/collections/face/products/corrector-emulgel"):
+        actual_corr_emulgel_url = self.driver.current_url
+        assert actual_corr_emulgel_url == expected_corr_emulgel_url, \
+            F"Expected {expected_corr_emulgel_url}, instead got {actual_corr_emulgel_url}"
+
+    def click_day_cream(self):
+        self.driver.find_element(*self.DAY_CREAM_LINK).click()
+
+    def verify_day_cream(self, expected_day_cream_url="https://shop.cureskin.com/collections/face/products/lightening-day-cream"):
+        actual_day_cream_url = self.driver.current_url
+        assert actual_day_cream_url == expected_day_cream_url, \
+            F"Expected {expected_day_cream_url}, instead got {actual_day_cream_url}"
+
+    def click_vitamin_cream(self):
+        self.driver.find_element(*self.VITAMIN_CREAM_LINK).click()
+
+    def verify_vitamin_cream(self, expected_vit_cream_url="https://shop.cureskin.com/collections/face/products/vitamin-abc-cream"):
+        actual_vit_cream_url = self.driver.current_url
+        assert expected_vit_cream_url == actual_vit_cream_url, \
+            F"Expected {expected_vit_cream_url}, instead got {actual_vit_cream_url}"
+
+    def click_txa_cream(self):
+        self.driver.find_element(*self.TXA_CREAM_LINK).click()
+
+    def verify_txa_cream(self, expected_txa_cream_url="https://shop.cureskin.com/collections/face/products/txa-clear-cream"):
+        actual_txa_cream_url = self.driver.current_url
+        assert actual_txa_cream_url == expected_txa_cream_url, \
+            F"Expected {expected_txa_cream_url}, instead got {actual_txa_cream_url}"
+
+    def click_skin_ren_serum(self):
+        self.driver.find_element(*self.SKIN_REN_SERUM_LINK).click()
+
+    def verify_skin_ren_serum(self, expected_skin_ren_url="https://shop.cureskin.com/collections/face/products/cureskin-skin-renewal-serum"):
+        actual_skin_ren_serum_url = self.driver.current_url
+        assert actual_skin_ren_serum_url == expected_skin_ren_url, \
+            F"Expected {expected_skin_ren_url}, instead got {actual_skin_ren_serum_url}"

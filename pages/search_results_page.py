@@ -12,6 +12,7 @@ class SearchResultsPage(Page):
     SUBNAV = (By.CSS_SELECTOR, "#nav-subnav[data-category='{CATEGORY}']")
     # SUBNAV_CD_VINYL = (By.XPATH, "//div[@data-category='music']")
     HEADER_LOGO = (By.CSS_SELECTOR, "a.header__heading-link")
+    SHOP_FACE_PAGE_2_LINK = (By.CSS_SELECTOR, 'a.pagination__item[href="/collections/face?page=2"]')
 
     def verify_empty_cart(self, expected_result_3):
         # self.driver.find_element(*EMPTY_CART)
@@ -51,4 +52,7 @@ class SearchResultsPage(Page):
 
     def click_on_cureskin_logo(self):
         self.driver.find_element(*self.HEADER_LOGO).click()
+
+    def click_on_face_page2(self):
+        self.driver.find_element(*self.SHOP_FACE_PAGE_2_LINK).click()
 
