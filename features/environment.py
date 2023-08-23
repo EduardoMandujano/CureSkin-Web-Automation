@@ -39,8 +39,10 @@ def browser_init(context, test_name):
 
     # To update Chrome Webdriver uncomment the line below
     # You need ONLY ONE instance of context.driver, never more than ONE.
-    context.driver = webdriver.Chrome(ChromeDriverManager().install())
+    # context.driver = webdriver.Chrome(ChromeDriverManager().install())
     # context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    # This below is a workaround for the Chrome 115 issue
+    context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(version="114.0.5735.90").install()))
 
     # Uncomment the line below for Firefox testing (NOT working anymore)
     # context.driver = webdriver.Firefox(service=service)

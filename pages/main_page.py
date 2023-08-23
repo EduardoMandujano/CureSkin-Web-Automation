@@ -19,7 +19,9 @@ class MainPage(Page):
         assert back_to_main, f"Expected navigation to Main Page"
 
     def click_on_x_icon(self):
-        self.driver.find_element(*self.X_ICON).click()
+        # Commenting this out, because sometimes TC break when X is not clickable right away
+        # self.driver.find_element(*self.X_ICON).click()
+        self.wait_for_element_click(*self.X_ICON)
 
     def click_on_terms_of_service(self):
         self.driver.find_element(*self.TOS_LINK).click()
