@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.support.wait import WebDriverWait
@@ -42,7 +43,19 @@ def browser_init(context, test_name):
     # context.driver = webdriver.Chrome(ChromeDriverManager().install())
     # context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     # This below is a workaround for the Chrome 115 issue
-    context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(version="114.0.5735.90").install()))
+    # context.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(version="114.0.5735.90").install()))
+    # context.driver = webdriver.Chrome(service=service, options=options)
+
+    # Hopefully this will fix the Chrome/Python/Selenium Debacle
+    # Change .Chrome to .Firefox to switch browsers September 3, 2023
+    # I may need to remove chromedriver.exe in the future
+    context.driver = webdriver.Chrome()
+    # service = Service()
+    # options = webdriver.ChromeOptions()
+    # options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    #
+    # context.driver = webdriver.Chrome(service=service, options=options)
+
 
     # Uncomment the line below for Firefox testing (NOT working anymore)
     # context.driver = webdriver.Firefox(service=service)

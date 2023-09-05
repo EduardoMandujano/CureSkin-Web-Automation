@@ -23,7 +23,14 @@ class Header(Page):
     CC_CREAM_TEXT = (By.CSS_SELECTOR, 'h1.h2')
     FREE_ASSESSMENT = (By.XPATH, "//*[@id='shopify-section-header']/sticky-header/nav/ul/li[5]/a")
     FREE_ASSESSMENT_TEXT = (By.CSS_SELECTOR, 'h1.Fd93Bb.F5UCq.p5VxAd')
-
+    SHOP_CART_ICON = (By.ID, 'cart-icon-bubble')
+    EMPTY_CART_TEXT = (By.CSS_SELECTOR, "h3.mini-cart__empty-text")
+    ADD_WHATS_NEW_ITEM = (By.CSS_SELECTOR, 'add-to-cart.w-full.button.button--small')
+    SIDEBAR_VIEW_CART_BUTTON = (By.CSS_SELECTOR, 'a.button.button--secondary[href="/cart"]')
+    # SIDEBAR_VIEW_CART_BUTTON = (By.XPATH, '//a[contains(@class, "button--secondary") and text()="View cart"]')
+    ADDED_ITEM_TEXT = (By.CSS_SELECTOR, 'a.cart-item__name.link')
+    MINUS_ICON = (By.CSS_SELECTOR, 'button.quantity__button.no-js-hidden')
+    EMPTIED_CART_TEXT = (By.CSS_SELECTOR, 'h2.cart__empty-text')
     def click_orders_menu(self):
         self.click(*self.ORDERS_CLICK)
 
@@ -89,4 +96,38 @@ class Header(Page):
         actual_free_assessment_text = self.driver.find_element(*self.FREE_ASSESSMENT_TEXT).text
         assert expected_free_assessment_text == actual_free_assessment_text, \
             F"Expected {expected_free_assessment_text}, instead got {actual_free_assessment_text}"
+
+    def click_shopping_cart_icon(self):
+        self.driver.find_element(*self.SHOP_CART_ICON).click()
+
+    def verify_empty_cart_text(self, expected_sidebar_text="Your cart is currently empty"):
+        actual_sidebar_text = self.find_element(*self.EMPTY_CART_TEXT).text
+        assert actual_sidebar_text == expected_sidebar_text, \
+            F"Expected {expected_sidebar_text}, instead got {actual_sidebar_text}"
+
+    def add_new_item_to_cart(self):
+        self.driver.find_element(*self.ADD_WHATS_NEW_ITEM).click()
+
+    def click_sidebar_view_cart(self):
+        sleep(2)
+        self.driver.find_element(*self.SIDEBAR_VIEW_CART_BUTTON).click()
+
+    def verify_your_cart_navigation(self, expected_cart_url="https://shop.cureskin.com/cart"):
+        actual_cart_url = self.driver.current_url
+        assert expected_cart_url == actual_cart_url, \
+            F"Expected {expected_cart_url}, instead got {actual_cart_url}."
+
+    def verify_item_added(self, expected_item_text="SPF30 Sunscreen"):
+        actual_item_text = self.find_element(*self.ADDED_ITEM_TEXT).text
+        assert expected_item_text == actual_item_text, \
+            F"Expected {expected_item_text}, instead got {actual_item_text}. Added item not verified."
+
+    def click_minus_icon(self):
+        self.find_element(*self.MINUS_ICON).click()
+
+    def verify_emptied_cart(self, expected_emptied_text="Your cart is currently empty"):
+        sleep(2)
+        actual_emptied_text = self.find_element(*self.EMPTIED_CART_TEXT).text
+        assert expected_emptied_text == actual_emptied_text, \
+            F"Expected {expected_emptied_text}, instead got {actual_emptied_text}."
 
